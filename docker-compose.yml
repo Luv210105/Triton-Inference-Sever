@@ -1,0 +1,11 @@
+services:
+  triton:
+    image: ${TRITON_IMAGE:-nvcr.io/nvidia/tritonserver:25.12-py3}
+    container_name: emotion-phobert-triton
+    command: tritonserver --model-repository=/models
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8002:8002"
+    volumes:
+      - ./model_repository:/models
