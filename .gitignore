@@ -49,6 +49,7 @@ docker-compose.override.yml
 
 # Large ML/model artifacts. Use Git LFS or external downloads if needed.
 *.onnx
+!model_repository/emotion_phobert/1/model.onnx
 *.pt
 *.pth
 *.ckpt
