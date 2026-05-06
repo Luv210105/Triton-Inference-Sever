@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import sys
+import time
 from pathlib import Path
 
 import streamlit as st
@@ -61,10 +62,13 @@ if st.button("Predict", type="primary"):
     else:
         try:
             with st.spinner("Đang chạy model trên Triton..."):
+                start_time = time.perf_counter()
                 prediction = predict(cleaned_text)
+                latency_ms = (time.perf_counter() - start_time) * 1000
 
             st.success(f"Kết quả: {prediction.label}")
             st.write(f"Độ tin cậy: {prediction.score:.2%}")
+            st.write(f"Latency: {latency_ms:.2f} ms")
 
             with st.expander("Xem điểm của tất cả nhãn"):
                 for label, score in sorted(
